@@ -9,49 +9,101 @@
 
 /* HTML:
   <div class="carousel">
-    <div class="left-button"> < </div>
+    
     <img src="./assets/carousel/mountains.jpeg" />
     <img src="./assets/carousel/computer.jpeg" />
     <img src="./assets/carousel/trees.jpeg" />
     <img src="./assets/carousel/turntable.jpeg" />
+    <div class="left-button"> < </div>
     <div class="right-button"> > </div>
   </div>
 */
 carouselContainer = document.querySelector(".carousel-container");
 carouselContainer.appendChild(createCarousel());
-console.log(carousel);
+console.log(carouselContainer);
 
 function createCarousel() {
   
-  carousel = document.createElement("div");
-  leftButton = document.createElement("div");
-  img1 = document.createElement("img");
-  img2 = document.createElement("img");
-  img3 = document.createElement("img");
-  img4 = document.createElement("img");
-  rightButton = document.createElement("div");
+  const carousel = document.createElement('div');
+  carousel.classList.add('carousel');
 
-  leftButton.textContent = "Previous";
-  rightButton.textContent = "Next";
-
-  img1.src = "./assets/carousel/mountains.jpeg";
-  img2.src = "./assets/carousel/computer.jpeg";
-  img3.src = "./assets/carousel/trees.jpeg";
-  img4.src = "./assets/carousel/turntable.jpeg";
-
-  carousel.appendChild(leftButton);
-  carousel.appendChild(img1);
-  carousel.appendChild(img2);
-  carousel.appendChild(img3);
-  carousel.appendChild(img4);
-  carousel.appendChild(rightButton);
-
-
-  carousel.classList.add("carousel");
-  leftButton.classList.add("left-button");
-  rightButton.classList.add("right-button");
+  // store carousel index
+  let index = 0;
 
   
+  
+  
+
+  //Store images in an array
+  const imgURL = [
+    './assets/carousel/mountains.jpeg',
+    './assets/carousel/computer.jpeg',
+    './assets/carousel/trees.jpeg',
+    './assets/carousel/turntable.jpeg'
+  ];
+
+  const imagesList = imgURL.map(urlVar => {
+    const img = document.createElement('img');
+    img.src = urlVar;
+    return img;
+  });
+
+  console.log(imagesList);
+  
+  // add images to the carousel
+  
+  for (i=0;i<imagesList.length;i++) {
+    carousel.appendChild(imagesList[i])
+  }
+
+// display first image in rotation
+  imagesList[index].style.visibility = 'visible';
+  
+
+// add left button
+  const ButtonLeft = document.createElement('div');
+  ButtonLeft.classList.add('left-button');
+  ButtonLeft.textContent = '<';
+  carousel.appendChild(ButtonLeft);
+
+  ButtonLeft.addEventListener('click', () => {
+    // hide the current image
+    imagesList[index].style.visibility = 'hidden';
+    
+    // loop over
+    index = index === 0 ? imagesList.length - 1 : --index;
+
+    //if first image when left button pressed, it stays the same
+    // index = index === 0 ? 0 : --index;
+
+    // display the previous image
+    imagesList[index].style.visibility = 'visible';
+    
+    
+  });
+  // add right button
+  const ButtonRight = document.createElement('div');
+  ButtonRight.classList.add('right-button');
+  ButtonRight.textContent = '>';
+  carousel.appendChild(ButtonRight);
+
+  // add right btn event listner
+  ButtonRight.addEventListener('click', () => {
+    // hide the current image
+    imagesList[index].style.visibility = 'hidden';
+   
+    // loop over
+    index = index === imagesList.length - 1 ? 0 : ++index;
+
+    //if last image, when right button is clicked, it stays the same
+    // index = index === imagesList.length - 1 ? imagesList.length - 1 : ++index;
+
+    // display the next image
+    imagesList[index].style.visibility = 'visible';
+    
+  });
+
   
   return carousel;
 }
+
