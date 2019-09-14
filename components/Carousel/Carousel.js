@@ -30,9 +30,6 @@ function createCarousel() {
   // store carousel index
   let index = 0;
 
-  
-  
-  
 
   //Store images in an array
   const imgURL = [
@@ -48,7 +45,7 @@ function createCarousel() {
     return img;
   });
 
-  console.log(imagesList);
+  
   
   // add images to the carousel
   
@@ -57,8 +54,7 @@ function createCarousel() {
   }
 
 // display first image in rotation
-  imagesList[index].style.visibility = 'visible';
-  
+  imagesList[index].style.display = "flex";
 
 // add left button
   const ButtonLeft = document.createElement('div');
@@ -68,7 +64,7 @@ function createCarousel() {
 
   ButtonLeft.addEventListener('click', () => {
     // hide the current image
-    imagesList[index].style.visibility = 'hidden';
+    imagesList[index].style.display = 'none';
     
     // loop over
     index = index === 0 ? imagesList.length - 1 : --index;
@@ -77,8 +73,7 @@ function createCarousel() {
     // index = index === 0 ? 0 : --index;
 
     // display the previous image
-    imagesList[index].style.visibility = 'visible';
-    
+    imagesList[index].style.display = "flex";
     
   });
   // add right button
@@ -90,8 +85,7 @@ function createCarousel() {
   // add right btn event listner
   ButtonRight.addEventListener('click', () => {
     // hide the current image
-    imagesList[index].style.visibility = 'hidden';
-   
+    imagesList[index].style.display = 'none';
     // loop over
     index = index === imagesList.length - 1 ? 0 : ++index;
 
@@ -99,7 +93,7 @@ function createCarousel() {
     // index = index === imagesList.length - 1 ? imagesList.length - 1 : ++index;
 
     // display the next image
-    imagesList[index].style.visibility = 'visible';
+    imagesList[index].style.display = "flex";
     
   });
 

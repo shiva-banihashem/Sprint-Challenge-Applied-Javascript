@@ -301,6 +301,6 @@ body {
 }
 .carousel img {
   width: 100%;
-  visibility: hidden;
+  display:none;
   position: absolute;
 }
